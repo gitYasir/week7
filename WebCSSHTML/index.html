@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Yasir" />
+    <meta name="description" content="Yasir's profile page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yasir's profile page</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body style="background-color:black;">
+    <header>
+        <img alt="My picture" src="images/yasir_1024.png" style="height:100px;width:100px;">
+        <h1>Yasir</h1>
+    </header>
+    <nav>
+        <h2>External Links</h2>
+        <ul>
+            <li><a href="https://github.com">GitHub</a></li>
+            <li><a href="https://linkedin.com">LinkedIn</a></li>
+        </ul>
+        <h2>Internal Links</h2>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#work-experience">Work Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#news-search">News Search</a></li>
+        </ul>
+    </nav>
+    <main class="flex-container">
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>
+                Yasir is a graduate of medicine from Wuhan University in China and has decided to switch
+                careers into the tech industry. He has always been curious about how software and websites
+                worked under the hood and thought that software development would give him the answers.
+            </p>
+            <p>
+                He enjoys watching Formula 1 on the weekends and playing basketball. He also enjoys spending
+                time with his family and gaming when at home. Yasir is eager to get started in his development
+                journey and help individuals and companies solve their problems.
+            </p>
+        </section>
+        <section id="work-experience">
+            <h2>Work Experience</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Company</th>
+                        <th>From</th>
+                        <th>To</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Security Guard</td>
+                        <td>Various Companies</td>
+                        <td>Mar 2020</td>
+                        <td>Nov 2022</td>
+                    </tr>
+                    <tr>
+                        <td>Warehouse Operative</td>
+                        <td>Various Companies</td>
+                        <td>Aug 2019</td>
+                        <td>Jul 2022</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="education">
+            <h2>Education</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Qualification</th>
+                        <th>Institution</th>
+                        <th>Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Medicine</td>
+                        <td>Wuhan University School of Medicine</td>
+                        <td>Jun 2019</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li>Next JS</li>
+                <li>React</li>
+                <li>NodeJS</li>
+                <li>SASS</li>
+            </ul>
+
+
+        </section>
+        <section id="news-search">
+            <h2>News Search</h2>
+            <form method="get" action="http://www.bbc.co.uk/search">
+                <label for="search-term">Search term: </label>
+                <input type="text" id="search-term" name="q" value="Birmingham" />
+                <button type="submit">Search</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>

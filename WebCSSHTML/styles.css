@@ -1,0 +1,64 @@
+﻿body {
+    padding: 0;
+    margin: 0;
+    font-family: Tahoma;
+}
+
+h1 {
+    color: #441873;
+    padding-left: 0.5em;
+    align-self: flex-end;
+}
+
+h2 {
+    color: #643893;
+    margin-left: -5px;
+}
+
+main h2 {
+    background-color: #C0ADE4;
+    margin-top: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    background-color: #A0D2EB;
+    padding: 2px 0 2px 2px;
+}
+
+nav {
+    background-color: #E5EAF5;
+}
+
+main {
+    background-color: #E5EAF5;
+}
+
+footer {
+    color: white;
+    background-color: #494D5F;
+}
+
+nav, main, footer {
+    padding: 0 5px;
+}
+
+header, nav, main {
+    border: 1px solid #8458B3;
+}
+
+section {
+    padding-bottom: 10px;
+}
+
+p {
+    margin: 0 5px;
+    padding: 0 5px;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1em;
+}
