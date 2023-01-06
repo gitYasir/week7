@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SpartaToDo.Data;
+using SpartaToDo.Services;
 
 namespace SpartaToDo {
     public class Program {
@@ -11,12 +12,12 @@ namespace SpartaToDo {
             var connectionString = builder.Configuration.GetConnectionString( "DefaultConnection" ) ?? throw new InvalidOperationException( "Connection string 'DefaultConnection' not found." );
             builder.Services.AddDbContext<SpartaToDoContext>( options =>
                 options.UseSqlServer( connectionString ) );
+            builder.Services.AddScoped<IToDoService, ToDoService>();
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<IdentityUser>( options => options.SignIn.RequireConfirmedAccount = true )
                 .AddEntityFrameworkStores<SpartaToDoContext>();
             builder.Services.AddControllersWithViews();
-
             var app = builder.Build();
 
             using ( var scope = app.Services.CreateScope() ) {
