@@ -13,10 +13,22 @@ namespace SpartaToDo.Controllers {
         }
 
         // GET: ToDo
-        public async Task<IActionResult> Index() {
-            return _context.ToDos != null ?
-                        View( await _context.ToDos.ToListAsync() ) :
-                        Problem( "Entity set 'SpartaToDoContext.ToDos'  is null." );
+        public async Task<IActionResult> Index( string filter = "" ) {
+            if ( _context.ToDos == null ) {
+                return Problem( "There are no ToDos to do!" );
+            }
+            if ( string.IsNullOrEmpty( filter ) ) {
+                return View( await _context.ToDos.ToListAsync() );
+            }
+
+            return View(
+                ( await _context.ToDos.ToListAsync() )
+                    .Where( td =>
+                        td.Title.Contains(
+                            filter, StringComparison.OrdinalIgnoreCase ) ||
+                        td.Description!.Contains(
+                            filter, StringComparison.OrdinalIgnoreCase )
+                        ) );
         }
 
         // GET: ToDo/Details/5
@@ -66,7 +78,9 @@ namespace SpartaToDo.Controllers {
             if ( toDo == null ) {
                 return NotFound();
             }
-            return View( toDo );
+            ToDoViewModel viewModel = Utils.GenerateToDoViewModel( toDo );
+            viewModel.PageTitle = "Edit";
+            return View( viewModel );
         }
 
         // POST: ToDo/Edit/5
@@ -74,12 +88,14 @@ namespace SpartaToDo.Controllers {
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit( int id, [Bind( "Id,Title,Description,Complete,DateCreated" )] ToDo toDo ) {
+        public async Task<IActionResult> Edit( int id, ToDoViewModel viewModel ) {
+            ToDo toDo = Utils.GenerateToDoFromViewModel( viewModel );
+
             if ( id != toDo.Id ) {
                 return NotFound();
             }
 
-            if ( ModelState.IsValid ) {
+            if ( TryValidateModel( toDo ) ) {
                 try {
                     _context.Update( toDo );
                     await _context.SaveChangesAsync();
@@ -94,7 +110,7 @@ namespace SpartaToDo.Controllers {
                 }
                 return RedirectToAction( nameof( Index ) );
             }
-            return View( toDo );
+            return View( viewModel );
         }
 
         // GET: ToDo/Delete/5

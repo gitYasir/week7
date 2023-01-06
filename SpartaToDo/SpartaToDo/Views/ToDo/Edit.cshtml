@@ -1,7 +1,7 @@
-﻿@model SpartaToDo.Models.ToDo
+﻿@model SpartaToDo.Models.ViewModels.ToDoViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData[ "Title" ] = Model.PageTitle;
 }
 
 <h1>Edit</h1>
@@ -12,26 +12,27 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ToDo.Id" />
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="ToDo.Title" class="control-label"></label>
+                <input asp-for="ToDo.Title" class="form-control" />
+                <span asp-validation-for="ToDo.Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="ToDo.Description" class="control-label"></label>
+                <input asp-for="ToDo.Description" class="form-control" />
+                <span asp-validation-for="ToDo.Description" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Complete" /> @Html.DisplayNameFor(model => model.Complete)
+                    <input class="form-check-input" asp-for="ToDo.Complete" />
+                    @Html.DisplayNameFor(model => model.ToDo.Complete)
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="DateCreated" class="control-label"></label>
-                <input asp-for="DateCreated" class="form-control" />
-                <span asp-validation-for="DateCreated" class="text-danger"></span>
+                <label asp-for="ToDo.DateCreated" class="control-label"></label>
+                <input asp-for="ToDo.DateCreated" class="form-control" />
+                <span asp-validation-for="ToDo.DateCreated" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -45,5 +46,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync( "_ValidationScriptsPartial" );
+    }
 }
