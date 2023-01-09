@@ -10,5 +10,6 @@ namespace SpartaToDo.Services {
         Task UpdateAsync( ToDo toDo );
         bool NoToDos();
         bool Exists( int id );
+        Task<List<ToDo>> GetListBySpartanIdAsync( string id );
     }
 }

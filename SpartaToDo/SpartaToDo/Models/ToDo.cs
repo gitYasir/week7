@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpartaToDo.Models {
     public class ToDo {
@@ -16,5 +17,10 @@ namespace SpartaToDo.Models {
         [DataType( DataType.Date )]
         [Display( Name = "Created" )]
         public DateTime DateCreated { get; init; } = DateTime.Now;
+
+        [ForeignKey( "Spartan" )]
+        public string SpartanId { get; set; } = null!;
+
+        public virtual Spartan Spartan { get; set; } = null!;
     }
 }

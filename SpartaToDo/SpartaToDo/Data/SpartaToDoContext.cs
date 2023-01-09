@@ -8,5 +8,6 @@ namespace SpartaToDo.Data {
             : base( options ) {
         }
         public DbSet<ToDo> ToDos { get; set; }
+        public DbSet<Spartan> Spartan { get; set; }
     }
 }

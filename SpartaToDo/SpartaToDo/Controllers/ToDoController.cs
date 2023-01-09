@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SpartaToDo.Models;
 using SpartaToDo.Models.ViewModels;
@@ -7,9 +8,11 @@ using SpartaToDo.Services;
 namespace SpartaToDo.Controllers {
     public class ToDoController : Controller {
         private readonly IToDoService _service;
+        private readonly UserManager<Spartan> _userManager;
 
-        public ToDoController( IToDoService service ) {
+        public ToDoController( IToDoService service, UserManager<Spartan> userManager ) {
             _service = service;
+            _userManager = userManager;
         }
 
         // GET: ToDo
@@ -60,7 +63,12 @@ namespace SpartaToDo.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create( CreateToDoViewModel model ) {
 
-            var toDo = Utils.GenerateToDoFromCreateToDoViewModel( model );
+            var currentUser = await _userManager.GetUserAsync( HttpContext.User );
+            if ( currentUser == null ) {
+                return Problem( "No current user id available" );
+            }
+
+            var toDo = Utils.GenerateToDoFromCreateToDoViewModel( model, currentUser );
 
             if ( TryValidateModel( toDo ) ) {
                 await _service.AddAsync( toDo );
@@ -93,7 +101,13 @@ namespace SpartaToDo.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit( int id, ToDoViewModel viewModel ) {
 
-            ToDo toDo = Utils.GenerateToDoFromViewModel( viewModel );
+            var toDoFromDb = await _service.FindOneAsync( id );
+
+            if ( toDoFromDb == null || id != toDoFromDb.Id ) {
+                return NotFound();
+            }
+
+            ToDo toDo = Utils.GenerateToDoFromViewModel( viewModel, toDoFromDb );
 
             if ( id != toDo.Id ) {
                 return NotFound();

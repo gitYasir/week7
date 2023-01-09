@@ -45,5 +45,9 @@ namespace SpartaToDo.Services {
             _context.Update( toDo );
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<ToDo>> GetListBySpartanIdAsync( string id ) {
+            return await _context.ToDos.Where( td => td.SpartanId == id ).ToListAsync();
+        }
     }
 }
